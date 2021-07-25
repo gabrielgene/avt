@@ -1,9 +1,16 @@
 import styled from 'styled-components';
 import { Text14 } from 'components/typography';
 
-export type Variant = 'contained' | 'outlined';
+type Variant = 'contained' | 'outlined';
 
-export const Wrapper = styled(Text14)<{ type: Variant }>`
+type Props = {
+  onClick: () => void;
+  text: string;
+  type: Variant;
+  className?: string;
+};
+
+const Wrapper = styled(Text14)<{ type: Variant }>`
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -22,13 +29,6 @@ export const Wrapper = styled(Text14)<{ type: Variant }>`
     }
   }}
 `;
-
-type Props = {
-  onClick: () => void;
-  text: string;
-  type: Variant;
-  className?: string;
-};
 
 export default function Button({ text, type, className }: Props) {
   return (

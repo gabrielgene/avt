@@ -1,14 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Header from './components/header';
 
+import 'rsuite/dist/styles/rsuite-default.css';
+
 function App() {
   return (
-    <div>
-      <Header />
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/regions/:regionName">
+          <Header />
+        </Route>
+        <Route exact path="/homes">
+          <Header />
+        </Route>
+        <Redirect to="/homes" />
+      </Switch>
+    </Router>
   );
 }
 

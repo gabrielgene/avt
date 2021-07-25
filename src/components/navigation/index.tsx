@@ -1,7 +1,7 @@
 import NavItem from 'components/nav-item';
 import styled from 'styled-components';
 
-export const Wrapper = styled.nav`
+const Wrapper = styled.nav`
   display: flex;
 `;
 
