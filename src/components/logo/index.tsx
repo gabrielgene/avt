@@ -3,7 +3,7 @@ import avantstaySvg from 'assets/avantstay.svg';
 import avantstayIconSvg from 'assets/avantstay-icon.svg';
 
 export default function Logo() {
-  const isTablet = useMedia({ maxWidth: '769px' });
+  const isTablet = useMedia({ maxWidth: '900px' });
 
   return (
     <img
