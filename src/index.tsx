@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Header from './components/header';
+import Home from './pages/home';
 
 import 'rsuite/dist/styles/rsuite-default.css';
 
@@ -17,10 +17,10 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/regions/:regionName">
-          <Header />
+          <Home />
         </Route>
         <Route exact path="/homes">
-          <Header />
+          <Home />
         </Route>
         <Redirect to="/homes" />
       </Switch>

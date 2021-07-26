@@ -36,6 +36,7 @@ const Value = styled(Text14)`
 `;
 
 const Menu = styled.div`
+  z-index: 2;
   position: absolute;
   box-sizing: border-box;
   background-color: #ffffff;

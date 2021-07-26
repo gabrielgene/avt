@@ -4,6 +4,7 @@ import Navigation from 'components/navigation';
 import Button from 'components/button';
 import SelectField from 'components/select-field';
 import DatePicker from 'components/date-picker';
+import TextField from 'components/text-field';
 
 export const Wrapper = styled.div`
   padding: 14px 80px;
@@ -18,9 +19,16 @@ export const TopWrapper = styled.div`
   margin-bottom: 14px;
 `;
 
-export const BottomWrapper = styled.div`
+export const FilterGroup = styled.div`
+  width: 100%;
   border: 1px solid #e8eff5;
   border-radius: 3px;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+`;
+
+export const BottomWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
@@ -31,6 +39,13 @@ export const ActionWrapper = styled.div`
 
 export const SignUp = styled(Button)`
   margin-right: 20px;
+`;
+
+const Divider = styled.div`
+  width: 1px;
+  height: 30px;
+  background: #e8eff5;
+  align-self: center;
 `;
 
 const data = [
@@ -90,18 +105,25 @@ export default function Header() {
         </ActionWrapper>
       </TopWrapper>
       <BottomWrapper>
-        <SelectField
-          options={data.map((d) => ({
-            value: d.id,
-            label: `${d.name}, ${d.stateName}`,
-          }))}
-          defaultValue="Any region"
-          width="30%"
-          label="Where"
-        />
-        <DatePicker width="30%" />
-        <SelectField options={guestAmountOptions} width="20%" label="Who" />
-        <SelectField options={orderOptions} width="20%" label="Order" />
+        <FilterGroup>
+          <SelectField
+            options={[{ value: '', label: 'Loading...' }]}
+            // options={data.map((d) => ({
+            //   value: d.id,
+            //   label: `${d.name}, ${d.stateName}`,
+            // }))}
+            defaultValue="Any region"
+            width="30%"
+            label="Where"
+          />
+          <Divider />
+          <DatePicker width="30%" />
+          <Divider />
+          <SelectField options={guestAmountOptions} width="20%" label="Who" />
+          <Divider />
+          <SelectField options={orderOptions} width="20%" label="Order" />
+        </FilterGroup>
+        <TextField label="Coupom" placeholder="Got a code?" />
       </BottomWrapper>
     </Wrapper>
   );
