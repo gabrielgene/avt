@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client/react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,8 +11,14 @@ import {
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Home from './pages/home';
+import { StoreProvider } from 'context/store';
 
 import 'rsuite/dist/styles/rsuite-default.css';
+
+const client = new ApolloClient({
+  uri: 'https://fake-api.avantstay.dev/graphql',
+  cache: new InMemoryCache(),
+});
 
 function App() {
   return (
@@ -30,7 +38,11 @@ function App() {
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <StoreProvider>
+        <App />
+      </StoreProvider>
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

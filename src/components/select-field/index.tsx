@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import { Text11, Text14 } from 'components/typography';
 import Icon from 'components/icon';
 import useClickOutside from 'hooks/useClickOutside';
+import { Filter } from 'context/types';
 
 type Props = {
-  options: Array<{ value: string; label: string }>;
+  options: Array<Filter>;
   defaultValue?: string;
+  onChange: (filter: Filter) => void;
   label: string;
   width: string;
 };
@@ -67,16 +69,18 @@ export default function SelectField({
   defaultValue,
   label,
   width,
+  onChange,
 }: Props) {
   const [open, setOpen] = React.useState<boolean>(false);
   const [selected, setSelected] = React.useState<any>(null);
   const ref = React.useRef<HTMLDivElement>(null);
   useClickOutside(ref, () => setOpen(false));
 
-  function handleClick(itemId: string) {
+  function handleClick(option: Filter) {
     setOpen(false);
-    const [selectedValue] = options.filter((o) => o.value === itemId);
+    const [selectedValue] = options.filter((o) => o.value === option.value);
     setSelected(selectedValue);
+    onChange(option);
   }
 
   return (
@@ -97,7 +101,7 @@ export default function SelectField({
           style={{ width: (ref.current && ref.current.clientWidth) || 200 }}
         >
           {options.map((o) => (
-            <MenuItem key={o.value} onClick={() => handleClick(o.value)}>
+            <MenuItem key={o.value} onClick={() => handleClick(o)}>
               <Text14>{o.label}</Text14>
             </MenuItem>
           ))}
