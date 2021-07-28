@@ -22,27 +22,27 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/regions/:regionName">
-          <Home />
-        </Route>
-        <Route exact path="/homes">
-          <Home />
-        </Route>
-        <Redirect to="/homes" />
-      </Switch>
-    </Router>
+    <Switch>
+      <Route exact path="/regions/:regionName">
+        <Home />
+      </Route>
+      <Route exact path="/homes">
+        <Home />
+      </Route>
+      <Redirect to="/homes" />
+    </Switch>
   );
 }
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <StoreProvider>
-        <App />
-      </StoreProvider>
-    </ApolloProvider>
+    <Router>
+      <ApolloProvider client={client}>
+        <StoreProvider>
+          <App />
+        </StoreProvider>
+      </ApolloProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

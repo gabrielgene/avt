@@ -8,6 +8,7 @@ import { Filter } from 'context/types';
 type Props = {
   options: Array<Filter>;
   defaultValue?: string;
+  value: Filter;
   onChange: (filter: Filter) => void;
   label: string;
   width: string;
@@ -68,18 +69,19 @@ export default function SelectField({
   options,
   defaultValue,
   label,
+  value,
   width,
   onChange,
 }: Props) {
   const [open, setOpen] = React.useState<boolean>(false);
-  const [selected, setSelected] = React.useState<any>(null);
+  const [selected, setSelected] = React.useState<Filter>(value);
   const ref = React.useRef<HTMLDivElement>(null);
   useClickOutside(ref, () => setOpen(false));
 
+  React.useEffect(() => setSelected(value), [value]);
+
   function handleClick(option: Filter) {
     setOpen(false);
-    const [selectedValue] = options.filter((o) => o.value === option.value);
-    setSelected(selectedValue);
     onChange(option);
   }
 

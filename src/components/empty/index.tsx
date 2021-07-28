@@ -43,7 +43,7 @@ export default function Empty() {
       <Text16>Try something else or reset the filters to see all homes.</Text16>
       <div>
         <StyledButton
-          onClick={() => {}}
+          onClick={() => (window.location.href = '/homes')}
           type="contained"
           text="See all homes"
         />

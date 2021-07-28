@@ -5,8 +5,10 @@ type Props = {
   count: number;
   loading: boolean;
 };
+
 const Wrapper = styled.div`
   margin-bottom: 30px;
+  align-self: flex-start;
 `;
 
 const Header = styled.div`
@@ -46,6 +48,7 @@ const Count = styled.div`
 `;
 
 export default function PageTitle({ count, loading }: Props) {
+  if (!loading && count === 0) return <div />;
   return (
     <Wrapper>
       <Header>

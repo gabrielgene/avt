@@ -11,12 +11,45 @@ export const GET_REGIONS = gql`
 `;
 
 export const GET_HOMES = gql`
-  query getHomes($region: UUID, $page: Int) {
-    homes(region: $region, page: $page, pageSize: 10) {
+  query getHomes(
+    $region: UUID
+    $page: Int
+    $period: BookingPeriod
+    $guests: Int
+    $order: HomesOrder
+  ) {
+    homes(
+      region: $region
+      page: $page
+      pageSize: 10
+      period: $period
+      guests: $guests
+      order: $order
+    ) {
       count
       results {
         id
         title
+        regionName
+        stateName
+        stateCode
+        bedsCount
+        hasPool
+        bathroomsCount
+        maxOccupancy
+        seasonPricing {
+          lowSeason {
+            minPrice
+            maxPrice
+          }
+          highSeason {
+            minPrice
+            maxPrice
+          }
+        }
+        photos {
+          url
+        }
       }
     }
   }

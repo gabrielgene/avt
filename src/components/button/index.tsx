@@ -30,9 +30,9 @@ const Wrapper = styled(Text14)<{ type: Variant }>`
   }}
 `;
 
-export default function Button({ text, type, className }: Props) {
+export default function Button({ text, type, className, onClick }: Props) {
   return (
-    <Wrapper type={type} className={className}>
+    <Wrapper type={type} className={className} onClick={onClick}>
       {text}
     </Wrapper>
   );

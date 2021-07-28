@@ -1,5 +1,5 @@
 import React from 'react';
-import { addDays } from 'date-fns';
+// import { addDays } from 'date-fns';
 import styled from 'styled-components';
 import { Text11, Text14 } from 'components/typography';
 import Icon from 'components/icon';
@@ -8,9 +8,12 @@ import { DateRange } from 'react-date-range';
 
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
+import { Period } from 'context/types';
 
 type Props = {
   width: string;
+  period: Period | null;
+  onChange: (p: Period) => void;
 };
 
 const Wrapper = styled.div`
@@ -53,7 +56,11 @@ const StyledIcon = styled(Icon)`
   margin-right: 15px;
 `;
 
-export default function BasicDateRangePicker({ width }: Props) {
+export default function BasicDateRangePicker({
+  width,
+  period,
+  onChange,
+}: Props) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('');
   const ref = React.useRef<HTMLDivElement>(null);
@@ -61,19 +68,32 @@ export default function BasicDateRangePicker({ width }: Props) {
   const [state, setState] = React.useState([
     {
       startDate: new Date(),
-      endDate: addDays(new Date(), 7),
+      endDate: new Date(),
       key: 'selection',
     },
   ]);
 
   useClickOutside(ref, () => setOpen(false));
 
+  React.useEffect(() => {
+    if (period) {
+      setValue(`${period?.checkIn} - ${period?.checkOut}`);
+    }
+  }, [period]);
+
   function handleChange(item: any) {
     const { startDate, endDate } = item.selection;
     const [start] = startDate.toISOString().split('T');
     const [end] = endDate.toISOString().split('T');
+    if (start === end) {
+      setState([item.selection]);
+      return;
+    }
+
     setValue(`${start} - ${end}`);
+    onChange({ checkIn: start, checkOut: end });
     setState([item.selection]);
+    setOpen(false);
   }
 
   return (
