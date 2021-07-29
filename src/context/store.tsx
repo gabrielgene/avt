@@ -9,19 +9,14 @@ type StoreProviderState = {
   regions: Array<Filter>;
   currentRegion: Filter;
   setRegion: (filter: Filter) => void;
-
   period: Period | null;
   setPeriod: (period: Period) => void;
-
   guests: Filter;
   setGuests: (guest: Filter) => void;
-
   order: Filter;
   setOrder: (order: Filter) => void;
-
   coupon: string;
   setCoupon: (coupon: string) => void;
-
   loading: boolean;
   homes: Array<Home>;
   count: number;
@@ -32,19 +27,14 @@ const initialValue = {
   regions: [initialRegion],
   currentRegion: initialRegion,
   setRegion: () => {},
-
   period: null,
   setPeriod: () => {},
-
   guests: initialGuests,
   setGuests: () => {},
-
   order: ORDER_OPTIONS[0],
   setOrder: () => {},
-
   coupon: '',
   setCoupon: () => {},
-
   loading: true,
   homes: [],
   count: 0,
@@ -57,8 +47,6 @@ export function StoreProvider(props: React.PropsWithChildren<{}>) {
   const history = useHistory();
   const regionParam = history.location.pathname.split('/')[2];
   const queryParams = new URLSearchParams(history.location.search);
-  const checkIn = queryParams.get('checkIn');
-  const checkOut = queryParams.get('checkOut');
 
   const [regions, setRegions] = React.useState<Array<Filter>>(
     initialValue.regions
@@ -98,6 +86,8 @@ export function StoreProvider(props: React.PropsWithChildren<{}>) {
     }
   }, [regionsQueryResult, regionParam]);
 
+  const checkIn = queryParams.get('checkIn');
+  const checkOut = queryParams.get('checkOut');
   const [period, setPeriod] = React.useState<Period | null>(null);
   const handlePeriod = (period: Period) => {
     const params = new URLSearchParams(queryParams);
@@ -197,17 +187,14 @@ export function StoreProvider(props: React.PropsWithChildren<{}>) {
         regions,
         currentRegion: currentRegion,
         setRegion: changeRegion,
-
         period,
         setPeriod: handlePeriod,
         guests,
         setGuests: changeGuests,
-
         order,
         setOrder: changeOrder,
         coupon,
         setCoupon: changeCoupon,
-
         loading: homesQueryResult.loading,
         homes: homesQueryResult.data?.homes.results || [],
         count: homesQueryResult.data?.homes.count || 0,

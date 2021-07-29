@@ -82,18 +82,20 @@ export default function BasicDateRangePicker({
   }, [period]);
 
   function handleChange(item: any) {
-    const { startDate, endDate } = item.selection;
-    const [start] = startDate.toISOString().split('T');
-    const [end] = endDate.toISOString().split('T');
-    if (start === end) {
-      setState([item.selection]);
-      return;
-    }
+    if (item.selection) {
+      const { startDate, endDate } = item.selection;
+      const [start] = startDate.toISOString().split('T');
+      const [end] = endDate.toISOString().split('T');
+      if (start === end) {
+        setState([item.selection]);
+        return;
+      }
 
-    setValue(`${start} - ${end}`);
-    onChange({ checkIn: start, checkOut: end });
-    setState([item.selection]);
-    setOpen(false);
+      setValue(`${start} - ${end}`);
+      onChange({ checkIn: start, checkOut: end });
+      setState([item.selection]);
+      setOpen(false);
+    }
   }
 
   return (

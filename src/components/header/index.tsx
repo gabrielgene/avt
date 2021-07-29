@@ -68,16 +68,12 @@ export default function Header() {
     regions,
     setRegion,
     currentRegion,
-
     period,
     setPeriod,
-
     guests,
     setGuests,
-
     order,
     setOrder,
-
     coupon,
     setCoupon,
   } = useStore();

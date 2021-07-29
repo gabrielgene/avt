@@ -1,11 +1,8 @@
 import React from 'react';
 
-export default function useClickOutside(
-  ref: any,
-  handler: (event: any) => void
-) {
+export default function useClickOutside(ref: any, handler: (event: MouseEvent) => void) {
   React.useEffect(() => {
-    const listener = (event: any) => {
+    const listener = (event: MouseEvent) => {
       if (!ref.current || ref.current.contains(event.target)) {
         return;
       }

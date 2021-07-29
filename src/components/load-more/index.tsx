@@ -16,7 +16,6 @@ const Wrapper = styled.div`
   padding: 5px 0;
   display: flex;
   justify-content: center;
-  /* margin-bottom: 55px; */
 `;
 
 const StyledText = styled(Text16)`
