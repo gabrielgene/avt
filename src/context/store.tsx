@@ -22,6 +22,7 @@ type StoreProviderState = {
   loading: boolean;
   homes: Array<Home>;
   count: number;
+  onLoad: (currentPage: number) => void;
 };
 
 const initialValue = {
@@ -41,6 +42,7 @@ const initialValue = {
   loading: true,
   homes: [],
   count: 0,
+  onLoad: () => {},
 };
 
 const StoreContext = React.createContext<StoreProviderState>(initialValue);
@@ -139,15 +141,38 @@ export function StoreProvider(props: React.PropsWithChildren<{}>) {
     }
   }, [orderParam]);
 
+  // const [page, setPage] = React.useState<number>(1);
   const homesQueryResult = useQuery<HomesData>(GET_HOMES, {
     variables: {
       region: currentRegion.value,
       page: 1,
       period,
-      guests: parseInt(guests.value, 10),
+      guests: parseInt(guests.value, 10) || 0,
       order: order.value,
     },
   });
+
+  const onLoad = (currentPage: number) => {
+    homesQueryResult.fetchMore({
+      variables: {
+        page: currentPage,
+      },
+      updateQuery: (prevResult, { fetchMoreResult }) => {
+        if (fetchMoreResult) {
+          fetchMoreResult.homes.results = [
+            ...prevResult.homes.results,
+            ...fetchMoreResult?.homes.results,
+          ];
+          return fetchMoreResult;
+        }
+        return prevResult;
+      },
+    });
+  };
+
+  const memoizedCallback = React.useCallback(onLoad, [homesQueryResult]);
+
+  console.log('LOADING', homesQueryResult.loading);
 
   return (
     <StoreContext.Provider
@@ -167,6 +192,7 @@ export function StoreProvider(props: React.PropsWithChildren<{}>) {
         loading: homesQueryResult.loading,
         homes: homesQueryResult.data?.homes.results || [],
         count: homesQueryResult.data?.homes.count || 0,
+        onLoad: memoizedCallback,
       }}
     >
       {props.children}

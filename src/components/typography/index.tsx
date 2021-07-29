@@ -31,7 +31,7 @@ export const Text16 = styled.div`
   font-family: Source Sans Pro;
   font-size: 16px;
   color: #505051;
-  line-height: 154%;
+  line-height: 20px;
   max-width: 510px;
 `;
 
