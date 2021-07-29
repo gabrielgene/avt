@@ -16,6 +16,9 @@ export const Wrapper = styled.div`
   width: 100%;
   top: 0;
   z-index: 100;
+  @media (max-width: 900px) {
+    padding: 14px 30px;
+  }
 `;
 
 export const TopWrapper = styled.div`
@@ -28,6 +31,7 @@ export const TopWrapper = styled.div`
 export const FilterGroup = styled.div`
   width: 100%;
   border: 1px solid #e8eff5;
+  max-width: 989px;
   border-radius: 3px;
   display: flex;
   align-items: center;
@@ -43,8 +47,13 @@ export const ActionWrapper = styled.div`
   display: flex;
 `;
 
-export const SignUp = styled(Button)`
+export const SignIn = styled(Button)`
+  font-size: 13px;
+  line-height: 18px;
   margin-right: 20px;
+  &:hover {
+    color: #53c3d0;
+  }
 `;
 
 const Divider = styled.div`
@@ -80,7 +89,7 @@ export default function Header() {
           <Logo />
           <Navigation />
           <ActionWrapper>
-            <SignUp text="Sign In" type="outlined" onClick={() => {}} />
+            <SignIn text="Sign In" type="outlined" onClick={() => {}} />
 
             <Button text="Sign Up" type="contained" onClick={() => {}} />
           </ActionWrapper>
@@ -102,7 +111,7 @@ export default function Header() {
               onChange={setGuests}
               options={GUEST_OPTIONS}
               value={guests}
-              width="20%"
+              width="15%"
               label="Who"
             />
             <Divider />
@@ -110,7 +119,7 @@ export default function Header() {
               onChange={setOrder}
               options={ORDER_OPTIONS}
               value={order}
-              width="20%"
+              width="25%"
               label="Order"
             />
           </FilterGroup>

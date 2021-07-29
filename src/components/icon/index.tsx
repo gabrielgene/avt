@@ -6,6 +6,7 @@ import pool from 'assets/pool.svg';
 import user from 'assets/user.svg';
 import rooms from 'assets/rooms.svg';
 import low from 'assets/low.svg';
+import more from 'assets/more.svg';
 import high from 'assets/high.svg';
 
 type Props = {
@@ -17,6 +18,7 @@ type Props = {
     | 'rooms'
     | 'user'
     | 'low'
+    | 'more'
     | 'high';
   className?: string;
 };
@@ -30,6 +32,7 @@ const ICONS = {
   rooms,
   low,
   high,
+  more,
 };
 
 const Image = styled.img`

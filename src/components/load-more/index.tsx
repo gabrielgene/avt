@@ -41,7 +41,7 @@ function useOnScreen(ref: any) {
   return isIntersecting;
 }
 
-const ScrollTrigger = ({ onShow, loading }: Props) => {
+const LoadMore = ({ onShow, loading }: Props) => {
   const [page, setPage] = React.useState<number>(1);
   const ref = React.useRef<any>(null);
   const isVisible = useOnScreen(ref);
@@ -61,4 +61,4 @@ const ScrollTrigger = ({ onShow, loading }: Props) => {
   );
 };
 
-export default ScrollTrigger;
+export default LoadMore;

@@ -14,6 +14,11 @@ const Wrapper = styled.div`
   width: max-content;
   margin: auto;
   margin-top: 40px;
+  @media (max-width: 900px) {
+    margin: 0;
+    padding: 0 30px;
+    width: 100%;
+  }
 `;
 
 export default function Home() {
@@ -39,7 +44,9 @@ export default function Home() {
             {homes.map((h) => (
               <HomeItem key={h.id} home={h} />
             ))}
-            <LoadMore onShow={onLoad} loading={loading} />
+            <If condition={count !== homes.length}>
+              <LoadMore onShow={onLoad} loading={loading} />
+            </If>
           </div>
         </If>
       </Wrapper>

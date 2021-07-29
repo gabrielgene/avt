@@ -10,10 +10,12 @@ const Wrapper = styled.div`
 
 const Item = styled(Text14)<{ active?: boolean }>`
   cursor: pointer;
+  display: flex;
+  align-items: center;
   &:hover {
     color: #53c3d0;
   }
-  ${({ active }) => (!!active ? 'color:#53c3d0' : 'color: inherit')}
+  ${({ active }) => (!!active ? 'color:#53c3d0' : 'color: #022b54')}
 `;
 
 const Bar = styled.div`
@@ -25,7 +27,7 @@ const Bar = styled.div`
 `;
 
 type Props = {
-  children: string;
+  children: React.ReactNode;
   active?: boolean;
 };
 

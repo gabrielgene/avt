@@ -17,6 +17,9 @@ const Wrapper = styled.div`
   border: 2px solid #e8eff5;
   border-radius: 3px;
   cursor: pointer;
+  @media (max-width: 900px) {
+    width: 111px;
+  }
 
   &:hover {
     border: 2px solid #d1eff2;

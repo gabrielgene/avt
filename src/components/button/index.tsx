@@ -15,6 +15,7 @@ const Wrapper = styled(Text14)<{ type: Variant }>`
   display: flex;
   align-items: center;
   font-weight: 600;
+  height: 36px;
   ${({ type }) => {
     if (type === 'contained') {
       return `
@@ -27,7 +28,7 @@ const Wrapper = styled(Text14)<{ type: Variant }>`
 				}
 			`;
     }
-  }}
+  }};
 `;
 
 export default function Button({ text, type, className, onClick }: Props) {
