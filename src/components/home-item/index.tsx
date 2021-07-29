@@ -1,8 +1,11 @@
 import styled from 'styled-components';
+import { useStore } from 'context/store';
 import { Home } from 'context/types';
 import { Text12, Text19 } from 'components/typography';
+import If from 'components/if-statement';
 import AdditionalInfo from './additional-info';
 import PriceRange from './price-range';
+import TotalPrice from './total-price';
 
 type Props = {
   home: Home;
@@ -44,7 +47,9 @@ const Title = styled(Text19)`
 `;
 
 export default function HomeItem({ home }: Props) {
+  const { period } = useStore();
   const {
+    id,
     title,
     regionName,
     stateName,
@@ -67,7 +72,12 @@ export default function HomeItem({ home }: Props) {
             bathroomsCount={home.bathroomsCount}
             maxOccupancy={home.maxOccupancy}
           />
-          <PriceRange seasonPricing={home.seasonPricing} />
+          <If condition={!period}>
+            <PriceRange seasonPricing={home.seasonPricing} />
+          </If>
+          <If condition={!!period}>
+            <TotalPrice homeId={id} />
+          </If>
         </Info>
       </Content>
       <Divider />

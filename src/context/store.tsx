@@ -172,8 +172,6 @@ export function StoreProvider(props: React.PropsWithChildren<{}>) {
 
   const memoizedCallback = React.useCallback(onLoad, [homesQueryResult]);
 
-  console.log('LOADING', homesQueryResult.loading);
-
   return (
     <StoreContext.Provider
       value={{

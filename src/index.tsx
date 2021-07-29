@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache, from } from '@apollo/client';
+import { BatchHttpLink } from '@apollo/client/link/batch-http';
 import { ApolloProvider } from '@apollo/client/react';
 import {
   BrowserRouter as Router,
@@ -15,8 +16,17 @@ import { StoreProvider } from 'context/store';
 
 import 'rsuite/dist/styles/rsuite-default.css';
 
+const URI = 'https://fake-api.avantstay.dev/graphql';
+
+const link = new BatchHttpLink({
+  uri: URI,
+  batchMax: 15, // No more than 5 operations per batch
+  batchInterval: 20, // Wait no more than 20ms after first batched operation
+});
+
 const client = new ApolloClient({
-  uri: 'https://fake-api.avantstay.dev/graphql',
+  link: from([link]),
+  // uri: 'https://fake-api.avantstay.dev/graphql',
   cache: new InMemoryCache(),
 });
 
