@@ -18,8 +18,8 @@ type HomesPricingData = {
 };
 
 const GET_PRICING = gql`
-  query getHomePricing($id: UUID, $period: BookingPeriod!) {
-    homesPricing(ids: [$id], period: $period) {
+  query getHomePricing($id: UUID, $period: BookingPeriod!, $coupon: String) {
+    homesPricing(ids: [$id], period: $period, coupon: $coupon) {
       numberOfNights
       total
     }
@@ -61,9 +61,9 @@ function formatNumber(number: number) {
 }
 
 export default function TotalPrice({ homeId }: Props) {
-  const { period } = useStore();
+  const { period, coupon } = useStore();
   const { loading, data } = useQuery<HomesPricingData>(GET_PRICING, {
-    variables: { id: homeId, period },
+    variables: { id: homeId, period, coupon },
   });
 
   if (loading || !data) {

@@ -68,6 +68,9 @@ export default function Header() {
 
     order,
     setOrder,
+
+    coupon,
+    setCoupon,
   } = useStore();
 
   return (
@@ -111,7 +114,12 @@ export default function Header() {
               label="Order"
             />
           </FilterGroup>
-          <TextField label="Coupom" placeholder="Got a code?" />
+          <TextField
+            label="Coupon"
+            placeholder="Got a code?"
+            value={coupon}
+            onChange={setCoupon}
+          />
         </BottomWrapper>
       </Wrapper>
       <div style={{ height: 160 }} />

@@ -4,6 +4,8 @@ import { Text11 } from 'components/typography';
 type Props = {
   label: string;
   placeholder: string;
+  value: string;
+  onChange: (value: string) => void;
 };
 
 const Wrapper = styled.div`
@@ -41,11 +43,20 @@ const Input = styled.input`
   }
 `;
 
-export default function TextField({ label, placeholder }: Props) {
+export default function TextField({
+  label,
+  placeholder,
+  value,
+  onChange,
+}: Props) {
   return (
     <Wrapper>
       <Label>{label}</Label>
-      <Input placeholder={placeholder} />
+      <Input
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
     </Wrapper>
   );
 }

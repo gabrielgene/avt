@@ -19,6 +19,9 @@ type StoreProviderState = {
   order: Filter;
   setOrder: (order: Filter) => void;
 
+  coupon: string;
+  setCoupon: (coupon: string) => void;
+
   loading: boolean;
   homes: Array<Home>;
   count: number;
@@ -38,6 +41,9 @@ const initialValue = {
 
   order: ORDER_OPTIONS[0],
   setOrder: () => {},
+
+  coupon: '',
+  setCoupon: () => {},
 
   loading: true,
   homes: [],
@@ -141,7 +147,20 @@ export function StoreProvider(props: React.PropsWithChildren<{}>) {
     }
   }, [orderParam]);
 
-  // const [page, setPage] = React.useState<number>(1);
+  const couponParam = queryParams.get('coupon');
+  const [coupon, setCoupon] = React.useState<string>('');
+  const changeCoupon = (value: string) => {
+    const params = new URLSearchParams(queryParams);
+    params.set('coupon', value);
+    history.push({ search: params.toString() });
+    setCoupon(value);
+  };
+  React.useEffect(() => {
+    if (couponParam) {
+      setCoupon(couponParam);
+    }
+  }, [couponParam]);
+
   const homesQueryResult = useQuery<HomesData>(GET_HOMES, {
     variables: {
       region: currentRegion.value,
@@ -186,6 +205,8 @@ export function StoreProvider(props: React.PropsWithChildren<{}>) {
 
         order,
         setOrder: changeOrder,
+        coupon,
+        setCoupon: changeCoupon,
 
         loading: homesQueryResult.loading,
         homes: homesQueryResult.data?.homes.results || [],
