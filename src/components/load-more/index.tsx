@@ -22,7 +22,7 @@ const StyledText = styled(Text16)`
   color: #b3b3b3;
 `;
 
-function useOnScreen(ref: any) {
+function useOnScreen(ref?: React.RefObject<HTMLDivElement>) {
   const [isIntersecting, setIntersecting] = React.useState<boolean>(false);
 
   React.useEffect(() => {
@@ -30,7 +30,7 @@ function useOnScreen(ref: any) {
       setIntersecting(entry.isIntersecting)
     );
 
-    observer.observe(ref.current);
+    if (ref && ref.current) observer.observe(ref.current);
 
     return () => {
       observer.disconnect();
@@ -42,7 +42,7 @@ function useOnScreen(ref: any) {
 
 const LoadMore = ({ onShow, loading }: Props) => {
   const [page, setPage] = React.useState<number>(1);
-  const ref = React.useRef<any>(null);
+  const ref = React.useRef<HTMLDivElement>(null);
   const isVisible = useOnScreen(ref);
 
   React.useEffect(() => {

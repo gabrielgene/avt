@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Text11, Text14 } from 'components/typography';
 import Icon from 'components/icon';
 import useClickOutside from 'hooks/useClickOutside';
-import { DateRange } from 'react-date-range';
+import { DateRange, OnChangeProps } from 'react-date-range';
 
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
@@ -56,6 +56,10 @@ const StyledIcon = styled(Icon)`
   margin-right: 15px;
 `;
 
+const OpacityText = styled.span`
+  opacity: 0.3;
+`;
+
 export default function BasicDateRangePicker({
   width,
   period,
@@ -81,20 +85,22 @@ export default function BasicDateRangePicker({
     }
   }, [period]);
 
-  function handleChange(item: any) {
-    if (item.selection) {
+  function handleChange(item: OnChangeProps) {
+    if ('selection' in item) {
       const { startDate, endDate } = item.selection;
-      const [start] = startDate.toISOString().split('T');
-      const [end] = endDate.toISOString().split('T');
-      if (start === end) {
-        setState([item.selection]);
-        return;
-      }
+      if (!!startDate && !!endDate) {
+        const [start] = startDate.toISOString().split('T');
+        const [end] = endDate.toISOString().split('T');
+        if (start === end) {
+          setState([{ startDate, endDate, key: 'selection' }]);
+          return;
+        }
 
-      setValue(`${start} - ${end}`);
-      onChange({ checkIn: start, checkOut: end });
-      setState([item.selection]);
-      setOpen(false);
+        setValue(`${start} - ${end}`);
+        onChange({ checkIn: start, checkOut: end });
+        setState([{ startDate, endDate, key: 'selection' }]);
+        setOpen(false);
+      }
     }
   }
 
@@ -103,9 +109,7 @@ export default function BasicDateRangePicker({
       <Wrapper onClick={() => setOpen(!open)}>
         <div>
           <Label>When</Label>
-          <Value>
-            {value || <span style={{ opacity: 0.3 }}>Select...</span>}
-          </Value>
+          <Value>{value || <OpacityText>Select...</OpacityText>}</Value>
         </div>
         <StyledIcon name={open ? 'chevronUp' : 'chevronDown'} />
       </Wrapper>

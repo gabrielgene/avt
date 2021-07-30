@@ -54,3 +54,12 @@ export const GET_HOMES = gql`
     }
   }
 `;
+
+export const GET_PRICING = gql`
+  query getHomePricing($id: UUID, $period: BookingPeriod!, $coupon: String) {
+    homesPricing(ids: [$id], period: $period, coupon: $coupon) {
+      numberOfNights
+      total
+    }
+  }
+`;

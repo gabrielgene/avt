@@ -85,6 +85,7 @@ export default function Header() {
           <Logo />
           <Navigation />
           <ActionWrapper>
+            {/* for empty functions log something like 'not implemented'? */}
             <SignIn text="Sign In" type="outlined" onClick={() => {}} />
 
             <Button text="Sign Up" type="contained" onClick={() => {}} />

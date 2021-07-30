@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useStore } from 'context/store';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { Text12, Text20 } from 'components/typography';
+import { GET_PRICING } from 'context/queries';
 
 type Props = {
   homeId: string;
@@ -17,14 +18,6 @@ type HomesPricingData = {
   homesPricing: Array<HomePricing>;
 };
 
-const GET_PRICING = gql`
-  query getHomePricing($id: UUID, $period: BookingPeriod!, $coupon: String) {
-    homesPricing(ids: [$id], period: $period, coupon: $coupon) {
-      numberOfNights
-      total
-    }
-  }
-`;
 
 const Text = styled(Text12)`
   line-height: 17px;
