@@ -10,7 +10,6 @@ import {
   Redirect,
 } from 'react-router-dom';
 import './index.css';
-import reportWebVitals from './reportWebVitals';
 import Home from './pages/home';
 import { StoreProvider } from 'context/store';
 
@@ -20,13 +19,12 @@ const URI = 'https://fake-api.avantstay.dev/graphql';
 
 const link = new BatchHttpLink({
   uri: URI,
-  batchMax: 15, // No more than 5 operations per batch
-  batchInterval: 20, // Wait no more than 20ms after first batched operation
+  batchMax: 15,
+  batchInterval: 20,
 });
 
 const client = new ApolloClient({
   link: from([link]),
-  // uri: 'https://fake-api.avantstay.dev/graphql',
   cache: new InMemoryCache(),
 });
 
@@ -56,8 +54,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
