@@ -1,46 +1,78 @@
-# Getting Started with Create React App
+# AvantStay FrontEnd Implementation Test
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The goal of this test is to check how you'd handle day-to-day tasks at AvantStay. 
 
-## Available Scripts
+It should be implemented using React and you can use `create-react-app` to start it.
 
-In the project directory, you can run:
+## Running tests
+```bash
+yarn install
+yarn start
+```
+In another tab run
+```bash
+yarn cypress:open
+```
+Open `homepage.spec.js`
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## What's gonna be taken into consideration?
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Attention to given specs
+- Following the given design as close as possible to "pixel perfect"
+- Project organization
+- Handling responsiveness properly (we don't expect it to work on mobile, but should work on tablet)
+- Code quality:
+  - cleanliness
+  - readability
+  - maintainability
+- Non-overengineered architecture
 
-### `yarn test`
+## Alright, here's the task
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+We've created a simplified version of our search and home details screens. 
 
-### `yarn build`
+You can check the design here: https://www.figma.com/file/1hxetzsmi8UU1s1U4Suopf/AvantStay-Front-end-Implementation-Test
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+You'll notice some comments in red providing some additional information about the design, these are to explain the different states certain components can be in.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Search screen
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Route should be `/homes` ("any region") or `/regions/:regionName` (selected region)
+  - Search fields should reflect on query-string params
+  - We should be able to share the URL to get the same results
+- Before showing first results, show placeholders for cards
+- User should be able to search homes using the existing filters/config:
+  - **Where**: all or a specific region
+  - **When**: start date & end date
+  - **Who**: number of guests, from 1 to 30
+  - **Order**: relevance, lowest price first, highest price first
+- Load 10 homes at a time and load more (if there are more to load) when the user scrolls to the end of the list (infinite scroll)
+- When there's a period selected on the search bar, show the total price (+ avg price per night) on the home cards
+- When there's a period selected, first load the search results and use a separate request to load simulated prices (slower query) after the results are shown
+- When no dates are selected, show the price range for high and low seasons (prime and low seasons)on the home cards
+- When no results are found, show the proper empty results screen
+- Navigation bar should stay sticked to the top when scrolling and it doesn't need to be functional (except the **find homes** link)
+- There's no need to use or implement a date/range picker component for the date fields (use some third party component or just regular text fields instead)
+- You can add `width`, `height`, `quality` (1-100) and `webp` (boolean) params (query string) to the home photos URL to get them properly resized/adjusted
 
-### `yarn eject`
+### API
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Base url: https://fake-api.avantstay.dev/graphql
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Because it's a fake API, please note:
+- Availability and most of the exposed data is not real but purely simulated for dev purposes
+- There's very little input validation, so make sure you're sending valid params (e.g. use `YYYY-MM-DD` format for date params)
+- Pricing simulation is intentionally slower because of this test requirements
+- To emulate empty search results, use booking periods with less than 3 or more than 15 nights
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+> Check the generated GraphQL documentation for more details.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Bonus if you use
 
-## Learn More
+- Typescript (strict mode)
+- Emotion or Styled-components for styling
+- Mobx, Redux or Context API for state management
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Questions?
+Send an email to coding-test@avantstay.com
