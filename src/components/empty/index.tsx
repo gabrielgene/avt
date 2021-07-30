@@ -37,7 +37,7 @@ const StyledButton = styled(Button)`
 
 export default function Empty() {
   return (
-    <Wrapper>
+    <Wrapper data-cy="EmptyPage">
       <Image src={satelliteSvg} alt="Satellite" />
       <Text16>Oops! We haven’t found anything matching your search.</Text16>
       <Text16>Try something else or reset the filters to see all homes.</Text16>

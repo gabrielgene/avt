@@ -58,7 +58,7 @@ export default function HomeItem({ home }: Props) {
   } = home;
 
   return (
-    <Wrapper>
+    <Wrapper data-cy="HomeItem">
       <Content>
         <Image src={`${photo.url}?height=208&width=390`} alt="Home image" />
         <Info>

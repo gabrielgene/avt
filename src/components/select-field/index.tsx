@@ -86,7 +86,7 @@ export default function SelectField({
   }
 
   return (
-    <div style={{ width }} ref={ref}>
+    <div style={{ width }} ref={ref} data-cy={label}>
       <Wrapper onClick={() => setOpen(!open)}>
         <div>
           <Label>{label}</Label>

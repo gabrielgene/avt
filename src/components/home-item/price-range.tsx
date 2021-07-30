@@ -49,7 +49,7 @@ export default function PriceRange({ seasonPricing }: Props) {
           <StyledIcon name="low" />
           <Text>Budget Season</Text>
         </Title>
-        <Text20>
+        <Text20 data-cy="RangeHigh">
           ${parseNumber(lowSeason.minPrice)} - $
           {parseNumber(lowSeason.maxPrice)}
         </Text20>
@@ -60,7 +60,7 @@ export default function PriceRange({ seasonPricing }: Props) {
           <StyledIcon name="high" />
           <Text>Prime Season</Text>
         </Title>
-        <Text20>
+        <Text20 data-cy="RangeLow">
           ${parseNumber(highSeason.minPrice)} - $
           {parseNumber(highSeason.maxPrice)}
         </Text20>

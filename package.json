@@ -31,12 +31,16 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "cypress open"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "plugins": [
+      "cypress"
     ]
   },
   "browserslist": {
@@ -54,6 +58,8 @@
   "devDependencies": {
     "@types/react-date-range": "^1.1.6",
     "@types/react-router-dom": "^5.1.8",
-    "@types/styled-components": "^5.1.11"
+    "@types/styled-components": "^5.1.11",
+    "cypress": "^8.1.0",
+    "eslint-plugin-cypress": "^2.11.3"
   }
 }

@@ -93,6 +93,7 @@ export default function Header() {
         <BottomWrapper>
           <FilterGroup>
             <SelectField
+              data-testid="selectRegion"
               options={regions}
               onChange={setRegion}
               value={currentRegion}

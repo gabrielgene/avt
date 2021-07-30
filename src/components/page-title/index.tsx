@@ -56,7 +56,7 @@ export default function PageTitle({ count, loading }: Props) {
         <Line />
       </Header>
       <Info>
-        <Count>{loading ? 'Loading' : count}</Count>
+        <Count data-cy="Count">{loading ? 'Loading' : count}</Count>
         <Text28>homes</Text28>
       </Info>
     </Wrapper>

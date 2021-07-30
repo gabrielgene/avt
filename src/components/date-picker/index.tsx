@@ -99,7 +99,7 @@ export default function BasicDateRangePicker({
   }
 
   return (
-    <div style={{ width }} ref={ref}>
+    <div style={{ width }} ref={ref} data-cy="DatePicker">
       <Wrapper onClick={() => setOpen(!open)}>
         <div>
           <Label>When</Label>

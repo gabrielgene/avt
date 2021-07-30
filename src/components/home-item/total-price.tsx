@@ -77,8 +77,8 @@ export default function TotalPrice({ homeId }: Props) {
   return (
     <div>
       <Text>Total • {pricing.numberOfNights} nights</Text>
-      <Text20>${formatNumber(pricing.total)}</Text20>
-      <Text>
+      <Text20 data-cy="TotalPrice">${formatNumber(pricing.total)}</Text20>
+      <Text data-cy="TotalPricePerNight">
         ${formatNumber(pricing.total / pricing.numberOfNights)} per night
       </Text>
     </div>

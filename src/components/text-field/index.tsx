@@ -56,6 +56,7 @@ export default function TextField({
     <Wrapper>
       <Label>{label}</Label>
       <Input
+        data-cy="Input"
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
